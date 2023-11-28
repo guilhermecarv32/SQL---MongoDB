@@ -1,6 +1,10 @@
+DROP DATABASE IF EXISTS mongo;
+CREATE DATABASE mongo;
+USE mongo;
+
 /* Lógico_1: */
 
-CREATE TABLE Funcionário (
+CREATE TABLE Funcionario (
     Nome VARCHAR (30),
     CPF VARCHAR (14) PRIMARY KEY,
     Telefone VARCHAR (12),
@@ -12,6 +16,7 @@ CREATE TABLE Funcionário (
 CREATE TABLE Financeiro (
     Valor VARCHAR(7),
     Data VARCHAR(10),
+    cpfFuncionario VARCHAR(14),
     Acesso VARCHAR(15)
 );
 
@@ -31,12 +36,12 @@ CREATE TABLE Estoque (
     Acesso VARCHAR(15)
 );
 
-CREATE TABLE Refeição (
+CREATE TABLE Refeicao (
     Tipo VARCHAR (30),
     NomeProduto VARCHAR(30)
 );
 
-CREATE TABLE Função (
+CREATE TABLE Funcao (
     Nome VARCHAR(30) PRIMARY KEY,
     cpfFuncionario VARCHAR(14),
     Acesso VARCHAR(15)
@@ -53,7 +58,7 @@ CREATE TABLE Fornecedores (
  
 ALTER TABLE Financeiro ADD CONSTRAINT FK_Financeiro_1
     FOREIGN KEY (cpfFuncionario, Acesso)
-    REFERENCES Função (cpfFuncionario, Acesso);
+    REFERENCES Funcao (cpfFuncionario, Acesso);
  
 ALTER TABLE Estoque ADD CONSTRAINT FK_Estoque_1
     FOREIGN KEY (NomeProduto, CategoriaProduto, Acesso)
@@ -61,13 +66,13 @@ ALTER TABLE Estoque ADD CONSTRAINT FK_Estoque_1
     
 ALTER TABLE Estoque ADD CONSTRAINT FK_Estoque_Funcao
     FOREIGN KEY (Acesso)
-    REFERENCES Função(Acesso);
+    REFERENCES Funcao(Acesso);
  
-ALTER TABLE Refeição ADD CONSTRAINT FK_Refeição_1
+ALTER TABLE Refeicao ADD CONSTRAINT FK_Refeicao_1
     FOREIGN KEY (NomeProduto)
     REFERENCES Estoque (NomeProduto);
  
-ALTER TABLE Função ADD CONSTRAINT FK_Função_2
+ALTER TABLE Funcao ADD CONSTRAINT FK_Funcao_2
     FOREIGN KEY (cpfFuncionario)
     REFERENCES Funcionario(CPF);
  
