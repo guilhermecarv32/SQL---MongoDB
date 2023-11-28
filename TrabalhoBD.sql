@@ -55,7 +55,9 @@ CREATE TABLE Fornecedores (
     NomeProduto VARCHAR(30),
     CategoriaProduto VARCHAR(30)
 );
- 
+
+//erros
+
 ALTER TABLE Financeiro ADD CONSTRAINT FK_Financeiro_1
     FOREIGN KEY (cpfFuncionario, Acesso)
     REFERENCES Funcao (cpfFuncionario, Acesso);
